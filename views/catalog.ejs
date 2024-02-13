@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CATALOG</title>
+</head>
+<style>
+  body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    h1 {
+        position: absolute;
+        left: 40px;
+        top: 40px;
+    }
+
+    .book_list {
+        width: 1200px;
+        height: 250px;
+        overflow-y: auto;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    .book_list ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        width: 100%;
+        
+    }
+
+
+    .book_list li {
+        text-align: center;
+        display: inline;
+        color: snow;
+        padding: 10px;
+        margin: 10px;
+        width: 70%;
+        background-color: black;
+        border-radius: 5px;
+    }
+
+    .backBtn{
+            width: 60px;
+            position: absolute;
+            height: 60px;
+            border-radius: 50%;
+            bottom: 30px;
+            left: 30px;
+            outline: none;
+            border: 2px solid black;
+            background: transparent;
+            color: black;
+            font-size: 14px;
+            transition: .3s ease-in;
+        }
+        .backBtn:hover{
+            background: snow;
+            color: rgb(32,35,66);
+        }
+</style>
+<body>
+    <h1>OUR BOOKS</h1>
+    <div class="book_list">
+        <ul>
+            <% books.forEach(function(book) { %>
+                <li>
+                    <strong>Title:</strong> <%= book.title %><br>
+                    <strong>Author:</strong> <%= book.author %><br>
+                    <strong>Genre:</strong> <%= book.genre %><br>
+                    <strong>Year:</strong> <%= book.year %><br>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+    <button onclick="goBack()" class="backBtn">BACK</button>
+
+    <script>
+        function goBack() {
+          // Перейти на предыдущую страницу в истории браузера
+          window.history.back();
+        }
+      </script>
+</body>
+</html>

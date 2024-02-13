@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADDING BOOK</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20%;
+        }
+        form input{
+            width: 230px;
+            height: 30px;
+  
+        }
+        .addBtn{
+            width: 230px;
+            height: 40px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .backBtn{
+            width: 60px;
+            position: absolute;
+            height: 60px;
+            border-radius: 50%;
+            top: 30px;
+            left: 30px;
+            outline: none;
+            border: 2px solid black;
+            background: transparent;
+            color: black;
+            font-size: 14px;
+            transition: .3s ease-in;
+        }
+        .backBtn:hover{
+            background: snow;
+            color: rgb(32,35,66);
+        }
+    </style>
+</head>
+<body>
+    <form action="/add" method="POST">
+        <input type="text" id="title" name="title" placeholder="TITLE"><br>
+        
+        <input type="text" id="author" name="author" placeholder="AUTHOR"><br>
+        
+        <input type="text" id="genre" name="genre" placeholder="GENRE"><br>
+        
+        <input type="text" id="year" name="year" placeholder="YEAR"><br><br>
+        
+        <button type="submit" value="Add Book" class="addBtn">ADD BOOK</button>
+    </form>
+    <button onclick="goBack()" class="backBtn">BACK</button>
+
+    <script>
+        function goBack() {
+          // Перейти на предыдущую страницу в истории браузера
+          window.history.back();
+        }
+      </script>
+</body>
+</html>

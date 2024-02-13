@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Books</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+      .edit-form {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        width: 340px;
+        border: 2px solid black;
+        height: auto;
+        text-align: center;
+        margin-top: 2%;
+        justify-content: center;
+        align-items: center;
+        vertical-align: top;
+      }
+      .edit-form input {
+        display: block;
+        margin-bottom: 15px;
+        margin-left: 20px;
+        height: 20px;
+        width: 200px;
+        margin-top: 5px;
+      }
+      .edit-form input {
+        margin-bottom: 15px;
+        margin-top: 5px;
+      }
+      .backBtn {
+        width: 60px;
+        position: absolute;
+        height: 60px;
+        border-radius: 50%;
+        bottom: 0;
+        left: 30px;
+        outline: none;
+        border: 2px solid black;
+        background: transparent;
+        color: black;
+        font-size: 14px;
+        transition: 0.3s ease-in;
+      }
+      .backBtn:hover {
+        background: snow;
+        color: rgb(32, 35, 66);
+      }
+      .book_list {
+        width: 30%;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+        color: black;
+        display: inline-block;
+        background: white;
+        border-radius: 15px;
+        vertical-align: top;
+      }
+      .toggle-edit-form{
+        width: 100px;
+        height: 20px;
+        outline: none;
+        border: none;
+        color: black;
+        margin-right: 10px;
+        font-size: 14px;
+      }
+      .delete{
+        width: 100px;
+        height: 20px;
+        outline: none;
+        border: none;
+        color: black;
+        margin-left: 10px;
+        font-size: 14px;
+        transition: .2s ease-in;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Edit Books</h1>
+    <% books.forEach(book => { %>
+    <div class="book_list">
+      <p>Title: <%= book.title %></p>
+      <p>Author: <%= book.author %></p>
+      <p>Genre: <%= book.genre %></p>
+      <p>Year: <%= book.year %></p>
+
+      <form
+        action="/edit/<%= book._id %>?_method=PUT"
+        method="POST"
+        class="edit-form"
+        data-book-id="<%= book._id %>"
+      >
+        <label for="title">Title:</label>
+        <input type="text" name="title" value="<%= book.title %>" />
+        <label for="author">Author:</label>
+        <input type="text" name="author" value="<%= book.author %>" />
+        <label for="genre">Genre:</label>
+        <input type="text" name="genre" value="<%= book.genre %>" />
+        <label for="year">Year:</label>
+        <input type="text" name="year" value="<%= book.year %>" />
+        <button type="submit" class="update">Update</button>
+        <button onclick="cancel()" class="cancel">Cancel</button>
+      </form>
+
+      <button
+        class="toggle-edit-form"
+        onclick="toggleEditForm('<%= book._id %>')"
+      >
+        Edit
+      </button>
+
+      <form
+        action="/edit/<%= book._id %>?_method=DELETE"
+        method="POST"
+        style="display: inline-block; background: transparent;"
+      >
+        <button type="submit" class="delete">Delete</button>
+      </form>
+    </div>
+    <% }) %>
+    <button onclick="goBack()" class="bakcBtn">BACK</button>
+
+    <script>
+      function toggleEditForm(bookId) {
+        const editForm = document.querySelector(
+          `.edit-form[data-book-id="${bookId}"]`
+        );
+
+        if (editForm.style.display === "none") {
+          editForm.style.display = "block";
+        } else {
+          editForm.style.display = "none";
+        }
+      }
+
+      function cancel(bookId) {
+        const editForm = document.querySelector(
+          `.edit-form[data-book-id="${bookId}"]`
+        );
+        editForm.style.display = "none";
+      }
+
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>
